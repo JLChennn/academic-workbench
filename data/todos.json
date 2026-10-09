@@ -1,18 +1,26 @@
 [
   {
-    "id": 1,
-    "text": "阅读一篇本领域论文并做精读笔记",
+    "id": 1791519840590,
+    "text": "还差一个agent项目，最好有真实改进/PR",
     "done": false,
-    "created": "2026-01-01 09:00",
+    "created": "2026-10-09 12:24",
     "deadline": "",
     "priority": "高"
   },
   {
-    "id": 2,
-    "text": "把想到的问题记进研究日志",
-    "done": true,
-    "created": "2026-01-01 09:00",
+    "id": 1791519852718,
+    "text": "打磨修改面试PPT",
+    "done": false,
+    "created": "2026-10-09 12:24",
     "deadline": "",
-    "priority": "中"
+    "priority": "高"
+  },
+  {
+    "id": 1791520209039,
+    "text": "Think：结合RSI改进Pi是否可行？",
+    "done": false,
+    "created": "2026-10-09 12:30",
+    "deadline": "",
+    "priority": "高"
   }
 ]

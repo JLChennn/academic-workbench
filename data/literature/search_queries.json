@@ -1,111 +1,58 @@
 {
   "module": "search_queries",
-  "title": "PubMed 已验证检索式（附返回条数）",
-  "source": "《外文期刊入门手册》第二部分 第 7 章",
-  "extracted_at": "2026-09-05",
-  "verified_on": "2026-09-03",
-  "verification_channel": "PubMed 网页 + NCBI E-utilities（esearch.fcgi）双通道实测",
-  "note": "返回条数会随数据库更新变动；检索式语法（字段标签、逻辑词、日期区间）不变可长期复用",
-  "count": 11,
+  "title": "机器学习 / LLM / Agent / 强化学习检索式库（OpenAlex / Crossref / arXiv API 语法）",
+  "source": "部署时按用户研究领域（LLM、Agent、强化学习，追踪 NeurIPS/ICML/ICLR 等 CCF-A 会议）生成",
+  "extracted_at": "2026-10-08",
+  "note": "以下检索式按 OpenAlex（api.openalex.org）与 Crossref（api.crossref.org）API 语法编写，可直接用于文献工具与 arXiv 追踪；返回条数为示意，实际以数据库当前数据为准，未逐条实测。",
+  "count": 8,
   "items": [
     {
-      "query": "\"Bioinformatics\"[Journal]",
-      "query_syntax_note": "",
-      "label": "零件一：[Journal]——把检索锁死在一本期刊内",
-      "returned_count": 19626,
-      "verified_on": "2026-09-03",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/?term=%22Bioinformatics%22%5BJournal%5D",
-      "purpose": "看一本刊里发表过什么；配合主题词就是\"单刊 + 主题\"检索（见 7.4 第 1 条）。"
+      "query": "search = \"large language model\" OR \"foundation model\"",
+      "query_syntax_note": "OpenAlex：search 参数做全文检索",
+      "label": "① LLM / 基础模型主题总览",
+      "purpose": "看该方向近期论文的总量与热点分布，做粗筛。"
     },
     {
-      "query": "AlphaFold[tiab]",
-      "query_syntax_note": "",
-      "label": "零件二：[tiab]——只在标题和摘要里找",
-      "returned_count": 3605,
-      "verified_on": "2026-09-03",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/?term=AlphaFold%5Btiab%5D",
-      "purpose": "最常用的主题检索方式——一个词出现在标题或摘要，说明论文内容与它直接相关。多个同义词用 OR 并联：(AlphaFold[tiab] OR AlphaFold2[tiab])。"
+      "query": "title.search = \"reinforcement learning from human feedback\"",
+      "query_syntax_note": "OpenAlex：title.search 只在标题里找",
+      "label": "② RLHF 标题检索（精准）",
+      "purpose": "RLHF 是一个具体子方向，用标题检索比全文检索更精准；同义词多时用 OR 并联。"
     },
     {
-      "query": "AlphaFold[tiab] AND 2021/01/01:2026/09/03[dp]",
-      "query_syntax_note": "写法示例：2021/01/01:2026/09/03[dp]",
-      "label": "零件三：[dp]——限定发表日期",
-      "returned_count": 3587,
-      "verified_on": "2026-09-03",
-      "pubmed_url": "",
-      "purpose": "只要近 N 年的文献。注意 3,605（全部年份）与 3,587（2021 起）只差 18 条——AlphaFold 一词 2021 年才出现，这个对比本身就是\"热门新词几乎全是近年论文\"的直观体现。"
+      "query": "title.search = \"LLM agent\" OR title.search = \"agentic\" OR title.search = \"language agent\"",
+      "query_syntax_note": "OpenAlex：多个 title.search 用 OR 并联",
+      "label": "③ Agent 方向标题检索",
+      "purpose": "AI Agent 方向论文通常用 agent / agentic / tool use 等词，多词并联防漏。"
     },
     {
-      "query": "AlphaFold[tiab] AND review[pt]",
-      "query_syntax_note": "写法示例：review[pt]",
-      "label": "零件四：[pt]——按出版类型筛选",
-      "returned_count": 319,
-      "verified_on": "2026-09-03",
-      "pubmed_url": "",
-      "purpose": "入门读综述（review）、排除预印本（NOT preprint[pt]，见 7.4 第 5 条）。常见类型：Review、Journal Article（默认大类）、Comparative Study、Editorial、Letter、Comment。"
+      "query": "search = \"chain-of-thought\" OR search = \"test-time compute\" AND from_publication_date:2024-01-01",
+      "query_syntax_note": "OpenAlex：from_publication_date 限定日期",
+      "label": "④ 推理与测试时计算 · 近两年",
+      "purpose": "只关注 2024 年以来的推理模型工作；日期区间控制\"近期\"。"
     },
     {
-      "query": "\"Machine Learning\"[MeSH Terms] AND AlphaFold[tiab]",
-      "query_syntax_note": "写法示例：\"Machine Learning\"[MeSH Terms]",
-      "label": "零件五：[MeSH Terms]——用官方主题词检索",
-      "returned_count": 264,
-      "verified_on": "2026-09-03",
-      "pubmed_url": "",
-      "purpose": "比 [tiab] 更\"懂同义词\"的检索方式——论文摘要里没出现 \"machine learning\" 字样、但被标了该 MeSH 词的，也能命中。代价是：MeSH 词是受控词表（得用官方那套词，不能自造），且标注有滞后（新论文未标完时 MeSH 检索会漏）。"
+      "query": "filter = cited_by_count:>100, from_publication_date:2020-01-01",
+      "query_syntax_note": "OpenAlex：filter 参数；可再叠加 search",
+      "label": "⑤ 高被引起点文献（2020 年后）",
+      "purpose": "刚进一个子方向先读什么：被引 100+ 的近期论文是现成的起点清单。"
     },
     {
-      "query": "(\"artificial intelligence\"[tiab] OR \"machine learning\"[tiab] OR \"deep learning\"[tiab]) AND \"Bioinformatics\"[Journal]",
-      "query_syntax_note": "",
-      "label": "① 单刊 × AI 主题——这本刊里有多少 AI 论文",
-      "returned_count": 1724,
-      "verified_on": "2026-09-03",
-      "pubmed_url": "",
-      "purpose": "改刊名即查别刊；加三个同义词是 AI 主题检索的惯例（不同论文用词不同，只搜一个词会漏）。"
+      "query": "query.title=LLM agent&rows=20&filter=from-pub-date:2025-01-01,type:proceedings-article",
+      "query_syntax_note": "Crossref API：query.title + filter=type:proceedings-article",
+      "label": "⑥ 会议论文限定（Crossref）",
+      "purpose": "NeurIPS/ICML/ICLR 的论文集在 Crossref 里多为 proceedings-article，用 type 过滤可只看会议论文。"
     },
     {
-      "query": "\"protein structure prediction\"[tiab] AND review[pt] AND 2021/01/01:2026/09/03[dp]",
-      "query_syntax_note": "",
-      "label": "② 跨刊只筛综述——这个领域有哪些综述可读",
-      "returned_count": 299,
-      "verified_on": "2026-09-03",
-      "pubmed_url": "",
-      "purpose": "换掉引号里的主题词即可用于任何领域；日期区间控制\"近期综述\"。"
+      "query": "search_query=all:\"large language model\" AND cat:cs.LG&sortBy=submittedDate",
+      "query_syntax_note": "arXiv API：export.arxiv.org/api/query",
+      "label": "⑦ arXiv 主站检索（cs.LG）",
+      "purpose": "arXiv 主站 API 检索，按提交时间倒序，配合文献工具的 arXiv 追踪使用。"
     },
     {
-      "query": "AlphaFold[tiab] AND 2021/01/01:2026/09/03[dp]",
-      "query_syntax_note": "",
-      "label": "③ 某子方向近 5 年全貌——这个方向五年里都做了什么",
-      "returned_count": 3587,
-      "verified_on": "2026-09-03",
-      "pubmed_url": "",
-      "purpose": "子方向用其标志性名词；同义词多时用 OR 并联（如 (AlphaFold[tiab] OR \"AlphaFold2\"[tiab] OR \"AlphaFold3\"[tiab])）。"
-    },
-    {
-      "query": "(\"Bioinformatics\"[Journal] OR \"Bioinformatics Advances\"[Journal] OR \"Nature Methods\"[Journal]) AND \"machine learning\"[tiab] AND 2021/01/01:2026/09/03[dp]",
-      "query_syntax_note": "",
-      "label": "④ 只筛方法学论文——这个领域有哪些新方法 / 新工具",
-      "returned_count": 644,
-      "verified_on": "2026-09-03",
-      "pubmed_url": "",
-      "purpose": "这里必须说明口径：PubMed 的出版类型 [pt] 里没有\"方法学论文\"这一类（可核对：AlphaFold[tiab] AND \"validation studies\"[pt] 无效，返回 0），所以\"筛方法学论文\"的可行做法是限定到方法学期刊（Bioinformatics、Nature Methods 等以发表方法与工具为主业的刊，见第三部分期刊地图\"方法与资源\"层）。另一个免费组合：\"computational biology\"[MeSH Terms] AND \"machine learning\"[tiab] AND 2024/01/01:2026/09/03[dp]（已验证，2026-09-03，返回 6,014 条）——按主题词收，量大，适合粗筛。"
-    },
-    {
-      "query": "AlphaFold[tiab] NOT preprint[pt]",
-      "query_syntax_note": "",
-      "label": "⑤ 排除预印本——只要正式发表的",
-      "returned_count": 3331,
-      "verified_on": "2026-09-03",
-      "pubmed_url": "",
-      "purpose": "（对比不排除时的 3,605 条，差 274 条 = 该主题下的预印本数，AlphaFold[tiab] AND preprint[pt] 已验证返回 274 条）。"
-    },
-    {
-      "query": "\"protein structure prediction\"[tiab] AND review[pt] AND 2021/01/01:2023/12/31[dp]",
-      "query_syntax_note": "",
-      "label": "⑥ 高被引起点文献——刚进一个领域先读什么",
-      "returned_count": 102,
-      "verified_on": "2026-09-03",
-      "pubmed_url": "",
-      "purpose": "早期的领域综述会替你梳理起点文献——综述的参考文献列表就是现成的\"高被引起点清单\"。"
+      "query": "filter = primary_location.source.id:...",
+      "query_syntax_note": "OpenAlex：先在 api.openalex.org/sources 搜到目标会议/期刊的 source id 再填入",
+      "label": "⑧ 限定单一来源（会议/期刊）",
+      "purpose": "只查 NeurIPS / ICML / ICLR 等某一场会议收录的论文时，用 source id 过滤最干净。"
     }
   ]
 }

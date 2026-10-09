@@ -68,7 +68,7 @@ HOST = "127.0.0.1"
 
 # worker 用 venv 的 python 启动，mineru CLI 与 python 在同一 bin 目录
 VENV_BIN = os.path.dirname(sys.executable)
-MINERU_CLI = os.path.join(VENV_BIN, "mineru")
+MINERU_CLI = os.path.join(VENV_BIN, "mineru" + (".exe" if sys.platform == "win32" else ""))
 
 IMAGE_EXTS = (".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp")
 

@@ -32,54 +32,39 @@ TIMEOUT = 12  # 每个请求超时秒数
 # ---------------------------------------------------------------------------
 SOURCES = [
     {
-        "key": "nature",
-        "name": "Nature 最新",
+        "key": "arxiv_lg",
+        "name": "arXiv · cs.LG 机器学习",
         "kind": "rss",
-        "url": "https://www.nature.com/nature.rss",
-        "limit": 6,
-        "icon": "🔬",
-    },
-    {
-        "key": "science",
-        "name": "Science 最新",
-        "kind": "rss",
-        "url": "https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=science",
-        "limit": 6,
-        "icon": "🎓",
-    },
-    {
-        "key": "cell",
-        "name": "Cell 最新",
-        "kind": "rss",
-        "url": "https://www.cell.com/action/showFeed?type=etoc&feed=rss&jc=cell",
-        "limit": 6,
-        "icon": "🧫",
-    },
-    {
-        "key": "natcomms",
-        "name": "Nature Communications",
-        "kind": "rss",
-        "url": "https://www.nature.com/ncomms.rss",
-        "limit": 6,
-        "icon": "📡",
-    },
-    {
-        "key": "biorxiv",
-        "name": "bioRxiv · 生物信息学",
-        "kind": "rss",
-        "url": "https://connect.biorxiv.org/biorxiv_xml.php?subject=bioinformatics",
-        "limit": 6,
-        "icon": "",
+        "url": "https://rss.arxiv.org/rss/cs.LG",
+        "limit": 8,
+        "icon": "🤖",
         "oa": True,   # 开放获取：可拼 PDF 直链，供「一键送转写」
     },
     {
-        "key": "medrxiv",
-        "name": "medRxiv 最新",
+        "key": "arxiv_ai",
+        "name": "arXiv · cs.AI 人工智能",
         "kind": "rss",
-        "url": "https://connect.medrxiv.org/medrxiv_xml.php?subject=all",
-        "limit": 4,
-        "icon": "",
+        "url": "https://rss.arxiv.org/rss/cs.AI",
+        "limit": 6,
+        "icon": "🧠",
         "oa": True,
+    },
+    {
+        "key": "arxiv_cl",
+        "name": "arXiv · cs.CL 计算语言学",
+        "kind": "rss",
+        "url": "https://rss.arxiv.org/rss/cs.CL",
+        "limit": 6,
+        "icon": "💬",
+        "oa": True,
+    },
+    {
+        "key": "natmi",
+        "name": "Nature Machine Intelligence",
+        "kind": "rss",
+        "url": "https://www.nature.com/natmachintell.rss",
+        "limit": 6,
+        "icon": "🧪",
     },
     {
         "key": "hackernews",
@@ -93,7 +78,7 @@ SOURCES = [
         "key": "aihot",
         "name": "AI Hot · 卡兹克",
         "kind": "rss",
-        "url": "https://aihot.virxact.com/feed.xml",
+        "url": "https://aihot.news/feed.xml",
         "limit": 10,
         "icon": "🔥",
     },
@@ -107,7 +92,7 @@ SOURCES = [
 ]
 
 # 需要把英文标题翻译成中文的资讯源（顶刊 + 英文预印本）
-TRANSLATE_KEYS = {"nature", "science", "cell", "natcomms", "biorxiv", "medrxiv"}
+TRANSLATE_KEYS = {"arxiv_lg", "arxiv_ai", "arxiv_cl", "natmi"}
 # 标题翻译的本地缓存（英文标题 → 中文），避免每次刷新重复付费
 _TRANSL_CACHE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "title_translations.json")
 
@@ -658,23 +643,26 @@ def fetch_weather():
 # 命中词一并返回，前端可显示「为什么相关」
 # ---------------------------------------------------------------------------
 INTEREST_TERMS = {
-    "ai": (30, [
-        "machine learning", "deep learning", "neural network", "transformer", "llm",
-        "large language model", "foundation model", "generative", "diffusion model",
-        "language model", "gpt", "multi-agent", "alphafold", "protein structure prediction",
-        "representation learning", "self-supervised", "fine-tuning", "agent",
-        "artificial intelligence", "ai",
+    "agent": (30, [
+        "agentic", "ai agent", "llm agent", "language agent", "multi-agent",
+        "tool use", "tool calling", "function calling", "mcp", "autonomous agent",
+        "long-horizon", "web agent", "computer use", "planning", "agent benchmark",
     ]),
-    "bio": (18, [
-        "protein", "gene", "genome", "genomic", "cell", "single-cell", "rna", "dna",
-        "crispr", "molecular", "biology", "biological", "organism", "phenotype",
-        "sequence", "expression", "evolution", "microbiome", "neuroscience", "transcriptom",
-        "enzyme", "antibody", "drug", "disease", "patient", "clinical", "tissue", "species",
+    "llm": (24, [
+        "large language model", "llm", "language model", "foundation model",
+        "transformer", "gpt", "in-context learning", "instruction tuning",
+        "context window", "kv cache", "reasoning", "chain-of-thought",
+        "test-time compute", "inference scaling", "prompt",
     ]),
-    "cross": (24, [
-        "single-cell", "spatial transcriptomics", "virtual cell", "protein design",
-        "structure prediction", "drug discovery", "systems biology", "synthetic biology",
-        "gene regulatory", "cell atlas", "multi-omics", "bioinformatics", "computational biology",
+    "rl": (18, [
+        "reinforcement learning", "rlhf", "reward model", "rlvr", "dpo",
+        "ppo", "alignment", "preference optimization", "reward shaping",
+        "policy optimization", "supervised fine-tuning", "fine-tuning",
+        "post-training",
+    ]),
+    "conference": (24, [
+        "neurips", "iclr", "icml", "aaai", "acl", "colm", "openreview",
+        "acceptance", "best paper", "workshop",
     ]),
 }
 

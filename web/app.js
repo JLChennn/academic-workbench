@@ -5536,6 +5536,11 @@
     var cj = grad.c_journal;
     $('#gradCJrnlAchieved').textContent = cj.achieved;
     $('#gradCJrnlRequired').textContent = cj.required;
+    var gradLabel = cj.label || 'C 刊论文';
+    if ($('#gradCJrnlName')) $('#gradCJrnlName').textContent = gradLabel;
+    if ($('#gradCJrnlHint')) {
+      $('#gradCJrnlHint').textContent = cj.required > 0 ? ('需发表 ' + cj.required + ' 篇 ' + gradLabel) : '毕业条件已满足';
+    }
     var pct = cj.required > 0 ? Math.min(100, cj.achieved / cj.required * 100) : 0;
     $('#gradCJrnlBar').style.width = pct + '%';
     // 论文列表

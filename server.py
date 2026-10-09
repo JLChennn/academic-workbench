@@ -38,7 +38,10 @@ PUBLICATIONS_FILE = os.path.join(DATA_DIR, "publications.json")
 
 PORT = 8765
 WORKER_BASE = "http://127.0.0.1:8766"   # PDF 转写 worker（pdf_worker/worker.py）
-WORKER_PY = os.path.join(BASE_DIR, "pdf_worker", ".venv", "bin", "python")
+if sys.platform == "win32":
+    WORKER_PY = os.path.join(BASE_DIR, "pdf_worker", ".venv", "Scripts", "python.exe")
+else:
+    WORKER_PY = os.path.join(BASE_DIR, "pdf_worker", ".venv", "bin", "python")
 WORKER_SCRIPT = os.path.join(BASE_DIR, "pdf_worker", "worker.py")
 CACHE_TTL = 1 * 3600          # 资讯缓存有效期：1 小时
 CACHE_MAX_AGE = 7 * 24 * 3600  # 缓存最长保留：7 天（之后即使断网也不展示）
@@ -304,6 +307,7 @@ def graduation_progress():
             "remaining": max(0, required - len(c_pubs)),
             "complete": len(c_pubs) >= required,
             "items": c_pubs,
+            "label": GRADUATION_REQUIREMENTS["c_journal_label"],
         }
     }
 

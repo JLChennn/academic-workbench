@@ -1,45 +1,47 @@
-# 七域固定检索查询组
+# 七域固定检索查询组（机器学习 / LLM / Agent / 强化学习）
 
-按源项目报告第 4 章的七大任务域组织。检索窗口默认最近 3 天。每组执行：至少 1 条通用查询 + 1 条限定来源查询（限定 sources.md 白名单站点）。
+按用户研究领域（LLM、Agent、强化学习，追踪 NeurIPS/ICML/ICLR 等 CCF-A 会议）组织。检索窗口默认最近 3 天。每组执行：至少 1 条通用查询 + 1 条限定来源查询（限定 sources.md 白名单站点）。
 
-## 域 1 · 蛋白质结构预测
+## 域 1 · LLM 基础模型与预训练
 
-- `AlphaFold OR "protein structure prediction"`（新论文/新版本）
-- `CASP16 OR CASP17`（评测动态）
-- 分子复合物、结合亲和力、构象系综相关的新独立评测
+- `"large language model" OR LLM OR "foundation model"`（新模型/新版本）
+- 预训练规模、数据治理、效率方法（MoE / 量化 / 蒸馏 / 稀疏激活）
 
-## 域 2 · 从头蛋白质设计
+## 域 2 · AI Agent 与智能体系统
 
-- `"de novo protein design" OR RFdiffusion OR ProteinMPNN OR AlphaProteo`
-- 设计成功率/实验验证的独立结果（对照锚点：CASP16 显示明确缺口）
+- `"AI agent" OR "LLM agent" OR agentic OR "language agent"`
+- 工具调用（function calling / MCP）、多智能体协作、记忆与规划、长程任务可靠性
 
-## 域 3 · 基因组解读
+## 域 3 · 强化学习与对齐
 
-- `"genome foundation model" OR AlphaGenome OR "Evo 2"`
-- 基因组模型的独立基准（防止只有自报成绩）
+- `"reinforcement learning" OR RLHF OR "RLVR" OR "reward model"`
+- 人类反馈 / 可验证奖励的后训练、RL 新方法、对齐与安全训练
 
-## 域 4 · 细胞状态与虚拟细胞
+## 域 4 · 推理与测试时计算
 
-- `"single-cell foundation model" OR "virtual cell"`，另加 `baseline evaluation` 类词核对独立评测
-- 十亿细胞计划等数据基础设施进展
+- `reasoning OR "chain-of-thought" OR "test-time compute" OR "inference scaling"`
+- 长思维链、搜索与验证、推理模型（reasoning model）新进展
 
-## 域 5 · 显微成像分析
+## 域 5 · 评测与基准
 
-- `AI microscopy image analysis` / `foundation model microscopy biological imaging`
+- `benchmark OR evaluation OR "agent benchmark"`（新基准/独立评测）
+- 与既有基准对照的独立评测（防止只有自报成绩）；基准饱和讨论
 
-## 域 6 · 实验自动化
+## 域 6 · 多模态与具身智能
 
-- `"self-driving lab" biology OR "automated experimentation" OR "autonomous lab"`
+- `multimodal OR "vision-language model" OR VLM OR "embodied AI"`
+- 多模态理解/生成、机器人学习、世界模型
 
-## 域 7 · 药物发现
+## 域 7 · 可解释性与安全
 
-- `AI drug discovery clinical trial`（只认公开可验证的临床进展，营销性里程碑声明标注「单一来源」）
+- `interpretability OR "mechanistic interpretability" OR alignment OR safety`
+- 机制可解释性、红队与安全评测、越狱与防护
 
 ## 横向查询（每次必查）
 
-- `"AI scientist" OR "AI biologist"`（自主科研系统，如 Robin 类）
-- 重点机构公告：Google DeepMind、Isomorphic Labs、Arc Institute、EvolutionaryScale、EMBL-EBI
-- 本领域重大奖项/评审动态（诺奖后续、CASP 组织方公告）
+- `NeurIPS OR ICML OR ICLR OR ACL OR AAAI OR COLM`（CCF-A 会议录用与动态、Best Paper、OpenReview 热点）
+- 重点机构公告：OpenAI、Google DeepMind、Anthropic、Meta AI、Mistral AI、xAI、Microsoft Research
+- 本领域重大奖项/评审动态（图灵奖、各学会奖项、会议组织方公告）
 
 ## 检索纪律
 
